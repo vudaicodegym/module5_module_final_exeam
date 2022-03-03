@@ -1,0 +1,157 @@
+<div class="container" style="text-align: center" xmlns="http://www.w3.org/1999/html">
+  <h2>bài thi thực hành module 5</h2>
+  <p>quản lý thư viện trường đại học havard</p>
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">create new book</button>
+  <table class="table">
+    <thead>
+    <tr>
+      <td><h3>id</h3> </td>
+      <td><h3>title</h3></td>
+<!--      <td><h3>img</h3></td>-->
+      <td><h3>author</h3></td>
+      <td><h3>optional</h3>  </td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let dai of books">
+<!--      <td><p href="#" (click)="">{{dai.id}}</p></td>-->
+      <!--            <td><a href="#" data-toggle="modal" data-target="#myModalDetails" (click)="showDetails(dai)">{{dai.name}}</a></td>-->
+      <td>{{dai.title}}</td>
+      <td><a href="#" data-toggle="modal" data-target="#myModalDetails" (click)="showOnlyOne(dai)">{{dai.title}}</a></td>
+      <td>{{dai.author}}</td>
+<!--      <td>{{dai.description}}</td>-->
+      <td ><button mat-stroked-buttonton color="warn" class="btn btn-warning" (click)="showOnlyOne(dai)" data-toggle="modal"
+                   data-target="#myModaledit">edit
+
+      </button>
+        <button type="button" (click)="delete(dai.id)" class="btn" style="background: red">delete
+        </button>
+      </td>
+      <!--      <td></td>-->
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="container">
+
+  <!--   Modal create-->
+
+  <div class="modal fade" id="myModal" role="dialog">
+    <form (ngSubmit)="createBook()" [formGroup]="formBook">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+                      <h4 class="modal-title">create book</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+          </div>
+          <div class="modal-body">
+            <table>
+              <tr>
+                <th>book title</th>
+                <input matInput formControlName="title">
+              </tr>
+              <tr>
+                <th>author</th>
+                <input matInput formControlName="author">
+              </tr>
+              <tr>
+                <th>description</th>
+                <input matInput formControlName="description">
+              </tr>
+
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-dismiss="modal" (click)="createBook()" >submit</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </form>
+  </div>
+
+</div>
+
+<!-- Modal edit-->
+<div class="container">
+
+
+
+  <div class="modal fade" id="myModaledit" role="dialog">
+    <form [formGroup]="formEdit">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <!--          <h4 class="modal-title">Modal Header</h4>-->
+          </div>
+          <div class="modal-body">
+            <table>
+              <tr>
+                <th>id:</th>
+                <input matInput formControlName="id" readonly>
+              </tr>
+              <tr>
+                <th>title</th>
+                <input matInput formControlName="title">
+              </tr>
+              <tr>
+                <th>author</th>
+                <input matInput formControlName="author">
+              </tr>
+              <tr>
+                <th>description</th>
+                <input matInput formControlName="description">
+              </tr>
+
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-dismiss="modal" (click)="editUser()" >submit</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </form>
+  </div>
+
+</div>
+<!--________________________-->
+
+<div class="modal" id="myModalDetails">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Details Book</h4>
+<!--        <button type="button" class="close" data-dismiss="modal" (click)="resetInput()">&times;</button>-->
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <label>ID book: {{book.id}} </label>
+        <br>
+        <label>Ten Sach: {{book.title}}</label>
+        <br>
+        <label>Tac Gia: {{book.author}} </label>
+        <br>
+        <label>Mo Ta: {{book.description}} </label>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+<!--        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="resetInput()">Close</button>-->
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
